@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.version      = "1.0.0"
 
 #私有仓库介绍
-  s.summary      = "CRM上传库"
+  s.summary      = "CRM日志上传库封装"
 
 #github上的地址
   s.homepage     = "https://github.com/zhy790026943/TCrm"
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/zhy790026943/TCrm.git", :tag => s.version }
 
 #对外共享的 .h和.m
-  s.source_files  = "TCrm/Class/*.{h,m}"
+  s.source_files  = "TCrm/Class/**/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
   # s.public_header_files = "Classes/**/*.h"
 
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   #  you can include multiple dependencies to ensure it works.
 
 #支持ARC
-  # s.requires_arc = true
+   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"

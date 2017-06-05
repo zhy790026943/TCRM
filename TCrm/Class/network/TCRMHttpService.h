@@ -17,7 +17,9 @@ typedef void (^TCRMModelBlock) (NSString* key, NSError* error);
 
 + (instancetype)sharedInstance;
 
-//发送日志
-- (void)sendCrmLog:(NSString *)key params:(NSDictionary *)params completeBlock:(TCRMModelBlock)block;
+
+- (void)sendCrmLog:(NSString *)key
+            params:(NSDictionary *)params
+     completeBlock:(TCRMModelBlock)block;
 
 @end

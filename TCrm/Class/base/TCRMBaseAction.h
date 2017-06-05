@@ -11,8 +11,6 @@
 
 @required
 
-@property (nonatomic, copy) NSString* cacheId;
-
 /**
  业务ID
 

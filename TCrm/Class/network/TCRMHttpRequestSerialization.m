@@ -8,10 +8,10 @@
 
 #import "TCRMHttpRequestSerialization.h"
 
-FOUNDATION_EXPORT NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary);
-FOUNDATION_EXPORT NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value);
+FOUNDATION_EXPORT NSArray * TCRMQueryStringPairsFromDictionary(NSDictionary *dictionary);
+FOUNDATION_EXPORT NSArray * TCRMQueryStringPairsFromKeyAndValue(NSString *key, id value);
 
-@interface AFQueryStringPair : NSObject
+@interface TCRMQueryStringPair : NSObject
 @property (readwrite, nonatomic, strong) id field;
 @property (readwrite, nonatomic, strong) id value;
 
@@ -20,7 +20,7 @@ FOUNDATION_EXPORT NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id 
 - (NSString *)URLEncodedStringValue;
 @end
 
-@implementation AFQueryStringPair
+@implementation TCRMQueryStringPair
 
 - (instancetype)initWithField:(id)field value:(id)value {
     self = [super init];
@@ -36,13 +36,13 @@ FOUNDATION_EXPORT NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id 
 
 - (NSString *)URLEncodedStringValue {
     if (!self.value || [self.value isEqual:[NSNull null]]) {
-        return AFPercentEscapedStringFromString([self.field description]);
+        return TCRMPercentEscapedStringFromString([self.field description]);
     } else {
-        return [NSString stringWithFormat:@"%@=%@", AFPercentEscapedStringFromString([self.field description]), AFPercentEscapedStringFromString([self.value description])];
+        return [NSString stringWithFormat:@"%@=%@", TCRMPercentEscapedStringFromString([self.field description]), TCRMPercentEscapedStringFromString([self.value description])];
     }
 }
 
-NSString * AFPercentEscapedStringFromString(NSString *string) {
+NSString * TCRMPercentEscapedStringFromString(NSString *string) {
     static NSString * const kAFCharactersGeneralDelimitersToEncode = @":#[]@"; // does not include "?" or "/" due to RFC 3986 - Section 3.4
     static NSString * const kAFCharactersSubDelimitersToEncode = @"!$&'()*+,;=";
     
@@ -103,7 +103,7 @@ NSString * AFPercentEscapedStringFromString(NSString *string) {
     
     NSString* query;
     if (parameters) {
-        query = AFQueryStringFromParameters(parameters);
+        query = TCRMQueryStringFromParameters(parameters);
         
         if ([self.HTTPMethodsEncodingParametersInURI containsObject:[method uppercaseString]]) {
             if (query && query.length > 0) {
@@ -125,20 +125,20 @@ NSString * AFPercentEscapedStringFromString(NSString *string) {
     return mutableRequest;
 }
 
-NSString * AFQueryStringFromParameters(NSDictionary *parameters) {
+NSString * TCRMQueryStringFromParameters(NSDictionary *parameters) {
     NSMutableArray *mutablePairs = [NSMutableArray array];
-    for (AFQueryStringPair *pair in AFQueryStringPairsFromDictionary(parameters)) {
+    for (TCRMQueryStringPair *pair in TCRMQueryStringPairsFromDictionary(parameters)) {
         [mutablePairs addObject:[pair URLEncodedStringValue]];
     }
     
     return [mutablePairs componentsJoinedByString:@"&"];
 }
 
-NSArray * AFQueryStringPairsFromDictionary(NSDictionary *dictionary) {
-    return AFQueryStringPairsFromKeyAndValue(nil, dictionary);
+NSArray * TCRMQueryStringPairsFromDictionary(NSDictionary *dictionary) {
+    return TCRMQueryStringPairsFromKeyAndValue(nil, dictionary);
 }
 
-NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
+NSArray * TCRMQueryStringPairsFromKeyAndValue(NSString *key, id value) {
     NSMutableArray *mutableQueryStringComponents = [NSMutableArray array];
     
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"description" ascending:YES selector:@selector(compare:)];
@@ -149,21 +149,21 @@ NSArray * AFQueryStringPairsFromKeyAndValue(NSString *key, id value) {
         for (id nestedKey in [dictionary.allKeys sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
             id nestedValue = dictionary[nestedKey];
             if (nestedValue) {
-                [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey), nestedValue)];
+                [mutableQueryStringComponents addObjectsFromArray:TCRMQueryStringPairsFromKeyAndValue((key ? [NSString stringWithFormat:@"%@[%@]", key, nestedKey] : nestedKey), nestedValue)];
             }
         }
     } else if ([value isKindOfClass:[NSArray class]]) {
         NSArray *array = value;
         for (id nestedValue in array) {
-            [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
+            [mutableQueryStringComponents addObjectsFromArray:TCRMQueryStringPairsFromKeyAndValue([NSString stringWithFormat:@"%@[]", key], nestedValue)];
         }
     } else if ([value isKindOfClass:[NSSet class]]) {
         NSSet *set = value;
         for (id obj in [set sortedArrayUsingDescriptors:@[ sortDescriptor ]]) {
-            [mutableQueryStringComponents addObjectsFromArray:AFQueryStringPairsFromKeyAndValue(key, obj)];
+            [mutableQueryStringComponents addObjectsFromArray:TCRMQueryStringPairsFromKeyAndValue(key, obj)];
         }
     } else {
-        [mutableQueryStringComponents addObject:[[AFQueryStringPair alloc] initWithField:key value:value]];
+        [mutableQueryStringComponents addObject:[[TCRMQueryStringPair alloc] initWithField:key value:value]];
     }
     
     return mutableQueryStringComponents;

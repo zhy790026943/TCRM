@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.name         = "TCrm"
 
 #私有仓库版本
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
 
 #私有仓库介绍
   s.summary      = "CRM日志上传库封装"

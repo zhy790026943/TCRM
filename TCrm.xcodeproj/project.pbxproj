@@ -58,6 +58,7 @@
 		E11DE53A1ECED5FE00A8664A /* TCRMLogCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCRMLogCache.m; sourceTree = "<group>"; };
 		E14ECE0D1ECECBE300C0CFAB /* TCRMBaseAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCRMBaseAction.h; sourceTree = "<group>"; };
 		E14ECE0E1ECECBE300C0CFAB /* TCRMBaseAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCRMBaseAction.m; sourceTree = "<group>"; };
+		E19433A71EE653940016BD53 /* TCRM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCRM.h; sourceTree = "<group>"; };
 		E1CE0EB01ECC42880084A81D /* TCrm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCrm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CE0EB41ECC42890084A81D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1CE0EB61ECC42890084A81D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -178,6 +179,7 @@
 		E1CE0EE61ECC42A50084A81D /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				E19433A71EE653940016BD53 /* TCRM.h */,
 				E1EAA0FB1ED708B000B807A7 /* tools */,
 				E1CE0F1B1ECDD3870084A81D /* base */,
 				E1CE0F1C1ECDD3870084A81D /* cache */,
